@@ -27,7 +27,8 @@ class HealthcareDataExtractorAnalyzer:
         data = self.extract_data_from_html(soup)
 
         # Append the scraped data to the healthcare_data dataframe
-        self.healthcare_data = self.healthcare_data.append(data, ignore_index=True)
+        self.healthcare_data = self.healthcare_data.append(
+            data, ignore_index=True)
 
     def extract_data_from_html(self, soup):
         # Extract relevant data from the parsed HTML
@@ -38,7 +39,8 @@ class HealthcareDataExtractorAnalyzer:
 
     def data_collection(self):
         # Define a list of URLs to scrape healthcare data from
-        urls = ['https://example.com/healthcare-data', 'https://example.com/clinical-trials']
+        urls = ['https://example.com/healthcare-data',
+                'https://example.com/clinical-trials']
 
         for url in urls:
             self.web_scraping(url)
@@ -51,7 +53,8 @@ class HealthcareDataExtractorAnalyzer:
         self.healthcare_data.dropna(inplace=True)
 
         # Standardize the format of the data in the healthcare_data dataframe
-        self.healthcare_data['content'] = self.healthcare_data['content'].apply(lambda x: self.clean_text(x))
+        self.healthcare_data['content'] = self.healthcare_data['content'].apply(
+            lambda x: self.clean_text(x))
 
     def clean_text(self, text):
         # Clean the text by removing special characters and stopwords
@@ -76,7 +79,8 @@ class HealthcareDataExtractorAnalyzer:
     def topic_modeling(self):
         # Vectorize the text data in the healthcare_data dataframe using TF-IDF
         vectorizer = TfidfVectorizer()
-        tfidf_matrix = vectorizer.fit_transform(self.healthcare_data['content'])
+        tfidf_matrix = vectorizer.fit_transform(
+            self.healthcare_data['content'])
 
         # Apply Latent Dirichlet Allocation (LDA) to identify key topics
         lda = LatentDirichletAllocation(n_components=10, random_state=42)
@@ -88,7 +92,8 @@ class HealthcareDataExtractorAnalyzer:
 
     def data_visualization(self):
         # Create a word cloud of the most commonly used words in the healthcare_data dataframe
-        wordcloud = WordCloud(width=800, height=400).generate(' '.join(self.healthcare_data['content']))
+        wordcloud = WordCloud(width=800, height=400).generate(
+            ' '.join(self.healthcare_data['content']))
         plt.figure(figsize=(12, 8))
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis('off')
@@ -96,7 +101,8 @@ class HealthcareDataExtractorAnalyzer:
 
         # Create a bar plot to visualize the sentiment scores
         plt.figure(figsize=(12, 6))
-        sns.barplot(x=self.healthcare_data['sentiment_score'], y=self.healthcare_data['title'])
+        sns.barplot(
+            x=self.healthcare_data['sentiment_score'], y=self.healthcare_data['title'])
         plt.xlabel('Sentiment Score')
         plt.ylabel('Article Title')
         plt.title('Sentiment Analysis')
