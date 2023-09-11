@@ -10,6 +10,7 @@ from sklearn.decomposition import LatentDirichletAllocation
 import matplotlib.pyplot as plt
 import seaborn as sns
 from wordcloud import WordCloud
+import warnings
 
 
 class HealthcareDataExtractorAnalyzer:
@@ -87,6 +88,7 @@ class HealthcareDataExtractorAnalyzer:
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
     analyzer = HealthcareDataExtractorAnalyzer()
     analyzer.data_collection()
     analyzer.data_cleaning_processing()
